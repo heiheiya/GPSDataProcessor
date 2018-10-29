@@ -9,7 +9,9 @@ Description:GPS data optimization
 
 //error list
 #define ALGO_SUCCESS                                0 //success
-#define ALGO_INVALID_ADDRESS            -1//input data arrays address are invalid
+#define ALGO_INVALID_ADDRESS                        -1//input data arrays address are invalid
+#define ALGO_INVALID_LENGTH                         -2//input data length is invalid
+#define ALGO_ACC_HANDLE_ERR                         -3//accelerated speed error
 /*************************************************
 Function:       AlgoGPSOptimizer
 Description:    get rid of the noise in GPS data and smooth the GPS curve

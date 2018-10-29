@@ -4,14 +4,14 @@ using namespace std;
 
 #define STATIC_UP_T 9.8
 #define STATIC_DOWN_T 9.1
-int accelerCpt(double* acceler_x, double* acceler_y, double* acceler_z, int length,double* mag,double* dir_xy,double* dir_xz)
+int accelerCpt(double* acceler_x, double* acceler_y, double* acceler_z, int length,double* mag/*,double* dir_xy,double* dir_xz*/)
 {
 
 	for (int i=0;i<length;i++)
 	{
 		mag[i] = sqrt(acceler_x[i] * acceler_x[i] + acceler_y[i] * acceler_y[i] + acceler_z[i] * acceler_z[i]);
-		dir_xy[i] = atan2(acceler_x[i], acceler_y[i]);
-		dir_xz[i] = atan2(acceler_x[i], acceler_z[i]);
+		//dir_xy[i] = atan2(acceler_x[i], acceler_y[i]);
+		//dir_xz[i] = atan2(acceler_x[i], acceler_z[i]);
 	}
 
 	return 1;
@@ -27,10 +27,10 @@ int staticProbabilityMeasure(double* acceler_x, double* acceler_y, double* accel
 		return -1;
 	}
 	double* mag = new double[length];
-	double* dir_xy = new double[length];
-	double* dir_xz = new double[length];
+	//double* dir_xy = new double[length];
+	//double* dir_xz = new double[length];
 
-	accelerCpt(acceler_x, acceler_y, acceler_z, length, mag, dir_xy, dir_xz);
+	accelerCpt(acceler_x, acceler_y, acceler_z, length, mag/*, dir_xy, dir_xz*/);
 
 	for (int i=0;i<length;i++)
 	{
@@ -66,7 +66,7 @@ int staticProbabilityMeasure(double* acceler_x, double* acceler_y, double* accel
 		}
 	}
 	delete[] mag;
-	delete[] dir_xy;
-	delete[] dir_xz;
+	//delete[] dir_xy;
+	//delete[] dir_xz;
 	return 0;
 }

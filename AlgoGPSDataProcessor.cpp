@@ -13,9 +13,28 @@ int AlgoGPSOptimizer(double* logitude_src, double* latitude_src, int length,
 	{
 		return ALGO_INVALID_ADDRESS;
 	}
+	
+	if (acceler_x == NULL || acceler_y == NULL || acceler_z == NULL )
+	{
+		return ALGO_INVALID_ADDRESS;
+	}
+	
+	if (timeDiff == NULL)
+	{
+		return ALGO_INVALID_ADDRESS;
+	}
+	
+	if (length <= 0)
+	{
+		return ALGO_INVALID_LENGTH;
+	}
 
 	int* probability = new int[length];
 	int err = staticProbabilityMeasure(acceler_x, acceler_y, acceler_z, length, probability);
+	if (err != 0)
+	{
+		return ALGO_ACC_HANDLE_ERR;
+	}
 
 	AlgoKalman kalmanFilter;
 	int i = 0;
