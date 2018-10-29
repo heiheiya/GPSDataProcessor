@@ -1,0 +1,21 @@
+CXX=g++
+CO=ar rcs
+
+CFLAG= -g -o3 -Wall
+INCLUDES= -I /usr/local/include/opencv #`pkg-config opencv --cflags`
+LIBS= /usr/local/lib/libopencv_core.a  #-L /usr/local/lib -lopencv_core #`pkg-config opencv --libs`
+
+
+SOURCE := AlgoKalman.cpp AlgoGPSDataProcessor.cpp
+OBJS :=AlgoKalman.o AlgoGPSDataProcessor.o
+TARGET :=libalgogpsdataprocessor.a
+
+
+$(TARGET):AlgoKalman.o AlgoGPSDataProcessor.o libalgogpsdataprocessor.a
+	$(CO) $(CFLAGS)  -o $(TARGET)  $(OBJS) $(LIBS)
+
+$(OBJS):$(SOURCE)
+	$(CXX) $(CFLAGS) $(INCLUDES) -c $(SOURCE) 
+
+clean:
+	rm -rf *.o $(TARGET)

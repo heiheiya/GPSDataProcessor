@@ -1,0 +1,20 @@
+CC=g++
+
+CFLAG+=-g -o3 -Wall
+INCLUDES+=`pkg-config --cflags opencv` 
+LIBS+=`pkg-config --libs opencv`
+
+
+SOURCE := AlgoKalman.cpp AlgoGPSDataProcessor.cpp
+OBJS :=AlgoKalman.o AlgoGPSDataProcessor.o
+TARGET :=libalgogpsdataprocessor.so
+
+
+$(TARGET):AlgoGPSDataProcessor.o
+	$(CC) $(CFLAGS) -shared -fPIC -o $(TARGET)   $(OBJS) $(LIBS)
+
+$(OBJS):$(SOURCE)
+	$(CC) $(CFLAGS) -fPIC -c $(SOURCE)  $(INCLUDES)
+
+clean:
+	rm -rf *.o $(TARGET)
